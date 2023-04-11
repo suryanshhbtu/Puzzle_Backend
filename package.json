@@ -1,0 +1,19 @@
+{
+  "name": "puzzle_backend",
+  "version": "1.0.0",
+  "description": "puzzle_backend for user and admin login",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suryanshhbtu/Puzzle_Backend.git"
+  },
+  "author": "Suryansh Srivastava",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/suryanshhbtu/Puzzle_Backend/issues"
+  },
+  "homepage": "https://github.com/suryanshhbtu/Puzzle_Backend#readme"
+}
