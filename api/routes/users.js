@@ -101,7 +101,15 @@ router.post("/signup", (req, res, next) => {
             return res.status(200).json({
               message: "Auth Successful",
               token: token,
-              expiresIn: "2h"
+              expiresIn: "2h",
+              _id: user[0]._id,
+                name: user[0].name,
+                email: user[0].email,
+                time: user[0].time,
+                score: user[0].score,
+                level: user[0].level,
+                role: user[0].role,
+                password: user[0].password,
             });
           }
           res.status(401).json({
