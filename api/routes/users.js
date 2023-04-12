@@ -32,6 +32,7 @@ router.post("/signup", (req, res, next) => {
                 score: req.body.score,
                 level: req.body.level,
                 role: req.body.role,
+                attempt: req.body.attempt,
                 password: hash,
               });
   
@@ -110,6 +111,7 @@ router.post("/signup", (req, res, next) => {
                 level: user[0].level,
                 role: user[0].role,
                 password: user[0].password,
+                attempt: user[0].attempt,
             });
           }
           res.status(401).json({
