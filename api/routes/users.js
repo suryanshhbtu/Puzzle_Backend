@@ -6,7 +6,28 @@ const User = require("../models/user");
 const bcrypt = require("bcrypt");
 
 const jwt = require('jsonwebtoken');
+const checkAuth = require("../middleware/check-auth");
 
+router.get("/:userId", checkAuth, (req, res, next)=>{
+    User.findById({_id: req.params.userId}).exec().then((user)=>{
+      if(user.length == 0){
+        return res.status(500).json({
+          message: "User does not exist"
+        });
+      }else{
+         return res.status(500).json({
+          user:user
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
+
+    });
+});
 router.post("/signup", (req, res, next) => {
     User.find({ email: req.body.email })
       .exec()
@@ -120,20 +141,19 @@ router.post("/signup", (req, res, next) => {
         });
       });
   });
-  router.patch("/:userId", (req, res, next) => {
+  
+  router.patch("/:userId",checkAuth,(req, res, next) => {
     const id = req.params.userId;
-    bcrypt.hash(req.body.password, 10, (err, hash) => {
-      if (err) {
-        return res.status(500).json({
-          error: err,
-        });
-      } else {
-        User.updateOne({ _id: id }, { password: hash })
+    
+        User.updateOne({ _id: id }, { level: req.body.level,
+           time: req.body.time,
+           attempt: req.body.attempt ,
+           score: req.body.score }  )
           .exec()
           .then((result) => {
             console.log(result);
             res.status(200).json({
-              message: "Password Updated",
+              message: "User Updated",
             });
           })
           .catch((err) => {
@@ -143,8 +163,32 @@ router.post("/signup", (req, res, next) => {
             });
   
           });
-      }
     });
-  });
   
+  // router.patch("/:userId", (req, res, next) => {
+  //   const id = req.params.userId;
+  //   bcrypt.hash(req.body.password, 10, (err, hash) => {
+  //     if (err) {
+  //       return res.status(500).json({
+  //         error: err,
+  //       });
+  //     } else {
+  //       User.updateOne({ _id: id }, { password: hash })
+  //         .exec()
+  //         .then((result) => {
+  //           console.log(result);
+  //           res.status(200).json({
+  //             message: "Password Updated",
+  //           });
+  //         })
+  //         .catch((err) => {
+  //           console.log(err);
+  //           res.status(500).json({
+  //             error: err,
+  //           });
+  
+  //         });
+  //     }
+  //   });
+  // });
   module.exports = router;
