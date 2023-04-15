@@ -8,6 +8,29 @@ const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const checkAuth = require("../middleware/check-auth");
 
+
+
+router.get("/all", checkAuth, (req, res, next)=>{
+  User.find({role: "user"}).exec().then((user)=>{
+    if(!user || user.length == 0){
+      return res.status(500).json({
+        message: "User does not exist"
+      });
+    }else{
+       return res.status(200).json({
+        user:user
+      });
+    }
+  })
+  .catch((err) => {
+    console.log(err);
+    res.status(500).json({
+      error: err,
+    });
+
+  });
+});
+
 router.get("/:userId", checkAuth, (req, res, next)=>{
     User.findById({_id: req.params.userId}).exec().then((user)=>{
       if(!user || user.length == 0){
