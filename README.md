@@ -27,6 +27,9 @@ Installation
     Create a MongoDB database and configure the connection string in the .env file.
     Run npm start to start the application.
     
+Deployment
+    This application is deployed on Microsoft Azure. You can access the deployed version at https://shivaji-puzzle.azurewebsites.net/
+    
 Contributing
     Contributions are welcome! If you find a bug or want to add a new feature, please open an issue first to discuss it.
     
