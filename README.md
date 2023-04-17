@@ -28,6 +28,9 @@
     Create a MongoDB database and configure the connection string in the .env file.
     Run npm start to start the application.
     
+ #Link to FrontEnd Repo. 
+    https://github.com/suryanshhbtu/Puzzle_Frontend
+    
 #Deployment
 
     This application is deployed on Microsoft Azure. You can access the deployed version at https://shivaji-puzzle.azurewebsites.net/
